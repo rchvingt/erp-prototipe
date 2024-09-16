@@ -137,6 +137,13 @@
                             <div class="text-truncate" data-i18n="Basic">Material</div>
                         </a>
                     </li>
+                    <!-- Supplier -->
+                    <li class="menu-item @if (isset($menuActiveSupplier)) {{ $menuActiveSupplier }} @endif">
+                        <a href="{{ route('ref-supplier.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-stop"></i>
+                            <div class="text-truncate" data-i18n="Basic">Supplier</div>
+                        </a>
+                    </li>
 
                 </ul>
             </aside>

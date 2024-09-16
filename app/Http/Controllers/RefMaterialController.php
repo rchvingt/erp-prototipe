@@ -106,7 +106,7 @@ class RefMaterialController extends Controller
         try {
             $mat = RefMaterial::find($id);
 
-            // delete user from db
+            // delete material from db
             if ($mat) {
                 $mat->delete();
 
