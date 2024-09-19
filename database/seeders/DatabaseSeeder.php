@@ -14,12 +14,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-        ]);
-        $this->call([
             RefMaterialSeeder::class,
-        ]);
-        $this->call([
             RefSupplierSeeder::class,
+            PurchaseOrderSeeder::class,
         ]);
     }
 }

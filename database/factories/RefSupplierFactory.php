@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\RefSupplier;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,6 +15,8 @@ class RefSupplierFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = RefSupplier::class;
+
     public function definition(): array
     {
         $this->faker = \Faker\Factory::create('id_ID');

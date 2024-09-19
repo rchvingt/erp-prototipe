@@ -33,6 +33,7 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
 
     <!-- Page CSS -->
 
@@ -145,6 +146,23 @@
                         </a>
                     </li>
 
+                    <!-- Module Area -->
+                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Module</span></li>
+                    <!-- Pembelian -->
+                    <li class="menu-item @if (isset($menuActivePurchaseOrder)) {{ $menuActivePurchaseOrder }} @endif">
+                        <a href="{{ route('pembelian.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-purchase-tag"></i>
+                            <div class="text-truncate" data-i18n="Basic">Pembelian</div>
+                        </a>
+                    </li>
+                    <!-- Gudang -->
+                    <li class="menu-item @if (isset($menuGudangActive)) {{ $menuGudangActive }} @endif">
+                        <a href="{{ route('gudang.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-store"></i>
+                            <div class="text-truncate" data-i18n="Basic">Gudang</div>
+                        </a>
+                    </li>
+
                 </ul>
             </aside>
             <!-- / Menu -->
@@ -172,7 +190,7 @@
                                 <a class="p-0 nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="../assets/img/avatars/1.png" alt
+                                        <img src="{{ asset('/assets/img/avatars/1.png') }}" alt
                                             class="h-auto w-px-40 rounded-circle" />
                                     </div>
                                 </a>
@@ -182,7 +200,7 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="../assets/img/avatars/1.png" alt
+                                                        <img src="{{ asset('/assets/img/avatars/1.png') }}" alt
                                                             class="h-auto w-px-40 rounded-circle" />
                                                     </div>
                                                 </div>
@@ -307,12 +325,19 @@
 
     <!-- Vendors JS -->
     <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/cleavejs/cleave.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/cleavejs/cleave-phone.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
+    <!-- Page JS -->
+
 
     <!-- Main JS -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
+    <script src="{{ asset('assets/js/forms-selects.js') }}"></script>
     <script>
         function confirmLogout() {
             // Ubah action form delete sesuai dengan id user yang akan dihapus

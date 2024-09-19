@@ -46,4 +46,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Relasi ke model PurchaseOrders pegawai yg melakukan pembelian
+    public function poByUser()
+    {
+        return $this->hasMany(PurchaseOrder::class, 'id_pegawai', 'id');
+    }
+
+    // Relasi dengan PurchaseOrders sebagai disetujui_oleh
+    public function verifByUser()
+    {
+        return $this->hasMany(PurchaseOrder::class, 'disetujui_oleh', 'id');
+    }
 }

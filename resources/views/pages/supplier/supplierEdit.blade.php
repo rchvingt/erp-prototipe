@@ -41,6 +41,7 @@
 
 
                             <button type="submit" class="btn btn-primary" id="send">Ubah</button>
+                            <a href="{{ route('ref-supplier.index') }}" class="btn btn-outline-secondary">Batal</a>
                         </form>
                     </div>
                 </div>

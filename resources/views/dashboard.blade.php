@@ -2,7 +2,7 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
-            <div class="mb-6 col-xxl-8 order-0">
+            <div class="mb-6 col-xxl-12 order-0">
                 <div class="card">
                     <div class="d-flex align-items-start row">
                         <div class="col-sm-7">

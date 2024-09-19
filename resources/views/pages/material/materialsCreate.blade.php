@@ -32,6 +32,7 @@
 
 
                             <button type="submit" class="btn btn-primary" id="send">Simpan</button>
+                            <a href="{{ route('ref-material.index') }}" class="btn btn-outline-secondary">Batal</a>
                         </form>
                     </div>
                 </div>

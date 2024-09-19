@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\GudangController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\RefMaterialController;
 use App\Http\Controllers\RefSupplierController;
 use App\Http\Controllers\UserController;
@@ -30,6 +32,15 @@ Route::middleware('auth')->group(function () {
 
     // Master Supplier
     Route::resource('master/ref-supplier', RefSupplierController::class);
+
+    // Purchase Order
+    Route::resource('transaksi/pembelian', PurchaseOrderController::class);
+    Route::get('get-supplier', [PurchaseOrderController::class, 'getSupplier']);
+    Route::get('get-material', [PurchaseOrderController::class, 'getMaterial']);
+    Route::get('get-salesperson', [PurchaseOrderController::class, 'getSalesperson']);
+
+    // Gudang
+    Route::resource('transaksi/gudang', GudangController::class);
 });
 
 require __DIR__.'/auth.php';

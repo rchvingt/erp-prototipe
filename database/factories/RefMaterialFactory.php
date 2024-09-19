@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\RefMaterial;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,6 +15,8 @@ class RefMaterialFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = RefMaterial::class;
+
     public function definition(): array
     {
         // Daftar material
