@@ -15,7 +15,7 @@
                         </div>
                         <div class="text-center col-sm-5 text-sm-left">
                             <div class="px-0 pb-0 card-body px-md-6">
-                                <img src="../assets/img/illustrations/man-with-laptop.png" height="175"
+                                <img src="{{ asset('assets/img/illustrations/man-with-laptop.png') }}" height="175"
                                     class="scaleX-n1-rtl" alt="View Badge User" />
                             </div>
                         </div>

@@ -122,15 +122,16 @@
                     <!-- User Area -->
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan</span></li>
                     {{-- Role and Permission --}}
-                    <li class="menu-item" style="">
+                    <li class="menu-item  @if (isset($menuActiveParent)) {{ $menuActiveParent }} @endif""
+                        style="">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-check-shield"></i>
                             <div class="text-truncate" data-i18n="Roles &amp; Permissions">Roles &amp; Permissions
                             </div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="app-access-roles.html" class="menu-link">
+                            <li class="menu-item @if (isset($menuActiveRole)) {{ $menuActiveRole }} @endif">
+                                <a href="{{ route('roles.index') }}" class="menu-link">
                                     <div class="text-truncate" data-i18n="Roles">Roles</div>
                                 </a>
                             </li>

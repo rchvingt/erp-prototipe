@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\RefMaterialController;
 use App\Http\Controllers\RefSupplierController;
+use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,9 +27,13 @@ Route::prefix('erp')->group(function () {
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-        // User
-        Route::resource('user', UserController::class);
-        // Route::get('/user', [UserController::class, 'index'])->name('user.index');
+        Route::prefix('/pengaturan')->group(function () {
+            // User
+            Route::resource('user', UserController::class);
+            // Route::get('/user', [UserController::class, 'index'])->name('user.index');
+            // List all roles
+            Route::get('/role', [RolesController::class, 'index'])->name('roles.index');
+        });
 
         Route::prefix('/master')->group(function () {
             // Master Material
