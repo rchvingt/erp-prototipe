@@ -121,6 +121,26 @@
 
                     <!-- User Area -->
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan</span></li>
+                    {{-- Role and Permission --}}
+                    <li class="menu-item" style="">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class="menu-icon tf-icons bx bx-check-shield"></i>
+                            <div class="text-truncate" data-i18n="Roles &amp; Permissions">Roles &amp; Permissions
+                            </div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="app-access-roles.html" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Roles">Roles</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="app-access-permission.html" class="menu-link">
+                                    <div class="text-truncate" data-i18n="Permission">Permission</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <!-- User -->
                     <li class="menu-item @if (isset($menuActive)) {{ $menuActive }} @endif">
                         <a href="{{ route('user.index') }}" class="menu-link">
@@ -341,7 +361,7 @@
     <script>
         function confirmLogout() {
             // Ubah action form delete sesuai dengan id user yang akan dihapus
-            var url = '/logout';
+            var url = '{{ route('logout') }}';
             document.getElementById('logoutForm').action = url;
 
             // Tampilkan modal

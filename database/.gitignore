@@ -1,1 +1,4 @@
 *.sqlite*
+/seeders/RoleSeeder.php
+/seeders/PermissionSeeder.php
+/seeders/_UserSeeder.php

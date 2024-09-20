@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             RefMaterialSeeder::class,
             RefSupplierSeeder::class,
             PurchaseOrderSeeder::class,
+            RolePermissionSeeder::class,
         ]);
     }
 }

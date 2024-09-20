@@ -13,13 +13,13 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::where('username', 'tester')->first();
+        $user = User::where('username', 'superadmin')->first();
 
         if (is_null($user)) {
             $user = new User();
-            $user->name = 'Main Tester';
-            $user->email = 'tester@example.com';
-            $user->username = 'tester';
+            $user->name = 'Super Admin';
+            $user->email = 'super-admin@corp.com';
+            $user->username = 'superadmin';
             $user->password = Hash::make('qwerty123');
             $user->save();
         }
