@@ -67,8 +67,20 @@
 
                                 </div>
                             </div>
+                            <div class="mb-6">
+                                <label class="form-label" for="user-role">User Role</label>
+                                <select id="ajax-select-role" class="mb-4 form-select w-50"
+                                    data-allow-clear="true"></select>
+                                @error('username')
+                                    <div class="error">{{ $message }}</div>
+                                @enderror
+                            </div>
 
-                            <button type="submit" class="btn btn-primary" id="send">Simpan</button>
+
+                            <button type="submit" class="btn btn-primary me-3" id="send">Simpan</button>
+
+                            <a href="{{ route('user.index') }}" class="btn btn-outline-secondary">Batal</a>
+
                         </form>
                     </div>
                 </div>
@@ -76,3 +88,63 @@
         </div>
     </div>
 @endsection
+@push('scriptjs')
+    <script>
+        $(function() {
+            $('#ajax-select-role').select2({
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' :
+                    'style',
+                placeholder: $(this).data('placeholder'),
+                ajax: {
+                    url: "{{ route('pengaturan.get-roles') }}",
+                    type: "GET",
+                    dataType: "json",
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            searchItem: params.term,
+                            page: params.page
+                        }
+                    },
+                    processResults: function(data, params) {
+                        // console.log(data); // Check the data format here
+
+                        params.page = params.page || 1;
+                        return {
+                            results: data.data.map(function(item) {
+                                return {
+                                    id: item.id,
+                                    text: item.name
+                                };
+                            }),
+                            // results: data.data,
+                            pagination: {
+                                more: data.last_page != params.page
+                            }
+                        };
+
+
+                    },
+                    cache: true
+                },
+                placeholder: "Pilih Role", //use this for data-allow-clear="true"
+                templateResult: templateResult,
+                templateSelection: templateSelection
+
+            })
+        })
+
+        function templateResult(data) {
+            // console.log('templateResult',data);
+            if (data.loading) {
+                return data.text;
+            }
+            return data.text;
+        }
+
+        function templateSelection(data) {
+            // console.log('templateSelection',data);
+            return data.text || "Select an option";
+        }
+    </script>
+@endpush

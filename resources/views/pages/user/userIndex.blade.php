@@ -47,8 +47,9 @@
                     <thead>
                         <tr class="text-nowrap">
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Email</th>
+                            <th>USER</th>
+                            <th>EMAIL</th>
+                            <th>ROLE</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -61,7 +62,7 @@
                                 <td>{{ $no++ }}.</td>
                                 <td>{{ $row->name }}</td>
                                 <td>{{ $row->email }}</td>
-
+                                <td></td>
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="p-0 btn dropdown-toggle hide-arrow"

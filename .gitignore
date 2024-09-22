@@ -20,3 +20,5 @@ yarn-error.log
 /.vscode
 /.zed
 Notes.txt
+/resources/views/pages/roles/_rolesIndex.blade.php
+/resources/views/pages/roles/partials/_scripts.blade.php

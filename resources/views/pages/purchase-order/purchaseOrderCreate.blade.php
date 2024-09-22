@@ -263,7 +263,7 @@
                     'style',
                 placeholder: $(this).data('placeholder'),
                 ajax: {
-                    url: "{{ URL('get-supplier') }}",
+                    url: "{{ route('pembelian.get-supplier') }}",
                     type: "GET",
                     dataType: "json",
                     delay: 250,
@@ -321,7 +321,7 @@
                     'style',
                 placeholder: $(this).data('placeholder'),
                 ajax: {
-                    url: "{{ URL('get-material') }}",
+                    url: "{{ route('pembelian.get-material') }}",
                     type: "GET",
                     dataType: "json",
                     delay: 250,
@@ -379,7 +379,7 @@
                     'style',
                 placeholder: $(this).data('placeholder'),
                 ajax: {
-                    url: "{{ URL('get-salesperson') }}",
+                    url: "{{ route('pembelian.get-salesperson') }}",
                     type: "GET",
                     dataType: "json",
                     delay: 250,

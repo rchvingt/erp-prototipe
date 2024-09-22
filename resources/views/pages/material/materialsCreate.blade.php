@@ -31,7 +31,7 @@
                             </div>
 
 
-                            <button type="submit" class="btn btn-primary" id="send">Simpan</button>
+                            <button type="submit" class="btn btn-primary me-3" id="send">Simpan</button>
                             <a href="{{ route('ref-material.index') }}" class="btn btn-outline-secondary">Batal</a>
                         </form>
                     </div>

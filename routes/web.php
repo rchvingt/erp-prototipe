@@ -30,9 +30,30 @@ Route::prefix('erp')->group(function () {
         Route::prefix('/pengaturan')->group(function () {
             // User
             Route::resource('user', UserController::class);
+            Route::get('get-roles', [UserController::class, 'getRoles'])->name('pengaturan.get-roles');
+
             // Route::get('/user', [UserController::class, 'index'])->name('user.index');
+
             // List all roles
-            Route::get('/role', [RolesController::class, 'index'])->name('roles.index');
+            Route::resource('/roles', RolesController::class);
+
+            // Route untuk menampilkan semua role
+            // Route::get('/roles', [RolesController::class, 'index'])->name('role.index');
+
+            // // Route untuk menampilkan form create role
+            // Route::get('/roles/create', [RolesController::class, 'create'])->name('role.create');
+
+            // // Route untuk menyimpan role baru
+            // Route::post('/roles', [RolesController::class, 'store'])->name('role.store');
+
+            // // Route untuk menampilkan form edit role
+            // Route::get('/roles/{role}/edit', [RolesController::class, 'edit'])->name('role.edit');
+
+            // // Route untuk memperbarui role yang ada
+            // Route::put('/roles/{role}', [RolesController::class, 'update'])->name('role.update');
+
+            // // Route untuk menghapus role
+            // Route::delete('/roles/{role}', [RolesController::class, 'destroy'])->name('role.destroy');
         });
 
         Route::prefix('/master')->group(function () {
@@ -68,9 +89,9 @@ Route::prefix('erp')->group(function () {
             // Delete specific purchase order
             Route::delete('/delete/{pembelian}', [PurchaseOrderController::class, 'destroy'])->name('pembelian.destroy');
 
-            Route::get('get-supplier', [PurchaseOrderController::class, 'getSupplier']);
-            Route::get('get-material', [PurchaseOrderController::class, 'getMaterial']);
-            Route::get('get-salesperson', [PurchaseOrderController::class, 'getSalesperson']);
+            Route::get('get-supplier', [PurchaseOrderController::class, 'getSupplier'])->name('pembelian.get-supplier');
+            Route::get('get-material', [PurchaseOrderController::class, 'getMaterial'])->name('pembelian.get-material');
+            Route::get('get-salesperson', [PurchaseOrderController::class, 'getSalesperson'])->name('pembelian.get-salesperson');
         });
 
         // Gudang

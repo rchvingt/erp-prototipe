@@ -72,7 +72,8 @@
                             </div>
 
 
-                            <button type="submit" class="btn btn-primary" id="send">Ubah</button>
+                            <button type="submit" class="btn btn-primary me-3" id="send">Ubah</button>
+                            <a href="{{ route('user.index') }}" class="btn btn-outline-secondary">Batal</a>
                         </form>
                     </div>
                 </div>
