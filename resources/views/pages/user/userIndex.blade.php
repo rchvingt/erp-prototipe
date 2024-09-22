@@ -35,13 +35,14 @@
     </script>
     <div class="container-xxl flex-grow-1 container-p-y">
         <!-- Responsive Table -->
+        @include('alert')
         <div class="card">
             {{-- <h5 class="card-header">Users</h5> --}}
             <div class="card-header d-flex justify-content-between">
                 <h5 class="card-title">Filter</h5>
                 <a href="{{ route('user.create') }}" class="btn btn-primary">Tambah User</a>
             </div>
-            @include('alert')
+
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead>
@@ -54,15 +55,24 @@
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @php
-                            $no = 1;
-                        @endphp
+
                         @forelse ($users as $row)
                             <tr>
-                                <td>{{ $no++ }}.</td>
+                                <td>{{ $loop->iteration }}.</td>
                                 <td>{{ $row->name }}</td>
                                 <td>{{ $row->email }}</td>
-                                <td></td>
+
+                                <td>
+
+
+                                    @if ($row->roles->isNotEmpty())
+                                        @foreach ($row->roles as $role)
+                                            <span class="text-truncate d-flex align-items-center text-heading"><i
+                                                    class="bx bx-user text-success me-2"></i>{{ $role->name }}</span>
+                                        @endforeach
+                                    @endif
+                                </td>
+
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="p-0 btn dropdown-toggle hide-arrow"

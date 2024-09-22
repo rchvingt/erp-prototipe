@@ -69,7 +69,7 @@
                             </div>
                             <div class="mb-6">
                                 <label class="form-label" for="user-role">User Role</label>
-                                <select id="ajax-select-role" class="mb-4 form-select w-50"
+                                <select id="ajax-select-role" class="mb-4 form-select w-50" name="roles"
                                     data-allow-clear="true"></select>
                                 @error('username')
                                     <div class="error">{{ $message }}</div>

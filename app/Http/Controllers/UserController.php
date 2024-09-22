@@ -14,7 +14,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        // Ambil semua user beserta role mereka
+        // $users = User::with('roles')->get();
         $users = User::all();
+        // dd($users);
         $menuActive = 'active';
 
         return view('pages.user.userIndex', compact('menuActive', 'users'));
@@ -43,12 +46,17 @@ class UserController extends Controller
                 'password' => 'required|min:6|confirmed',
             ]);
             //  insert to database
-            User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'username' => $request->username,
-                'password' => Hash::make($request->password),
-            ]);
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->username = $request->username;
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            // Assign role ke user
+            if ($request->roles) {
+                $user->syncRoles($request->roles);
+            }
 
             return redirect()->back()->with([
                 'success' => 'User berhasil ditambahkan',
@@ -101,6 +109,10 @@ class UserController extends Controller
 
             // update user
             $user->update();
+
+            if ($request->roles) {
+                $user->syncRoles($request->roles);
+            }
 
             return redirect()->route('user.index')->with(['success' => 'User berhasil diperbarui']);
         } catch (\Exception $e) {
