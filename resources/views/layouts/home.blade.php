@@ -118,37 +118,39 @@
                         </a>
                     </li>
 
-
-                    <!-- User Area -->
-                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan</span></li>
-                    {{-- Role and Permission --}}
-                    <li class="menu-item  @if (isset($menuActiveParent)) {{ $menuActiveParent }} @endif""
-                        style="">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-check-shield"></i>
-                            <div class="text-truncate" data-i18n="Roles &amp; Permissions">Roles &amp; Permissions
-                            </div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item @if (isset($menuActiveRole)) {{ $menuActiveRole }} @endif">
-                                <a href="{{ route('roles.index') }}" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Roles">Roles</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="menu-link">
-                                    <div class="text-truncate" data-i18n="Permission">Permission</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- User -->
-                    <li class="menu-item @if (isset($menuActive)) {{ $menuActive }} @endif">
-                        <a href="{{ route('user.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user"></i>
-                            <div class="text-truncate" data-i18n="Basic">User</div>
-                        </a>
-                    </li>
+                    @if (auth()->user()->can('role.view'))
+                        <!-- User Area -->
+                        <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan</span>
+                        </li>
+                        {{-- Role and Permission --}}
+                        <li class="menu-item  @if (isset($menuActiveParent)) {{ $menuActiveParent }} @endif""
+                            style="">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-check-shield"></i>
+                                <div class="text-truncate" data-i18n="Roles &amp; Permissions">Roles &amp; Permissions
+                                </div>
+                            </a>
+                            <ul class="menu-sub">
+                                <li class="menu-item @if (isset($menuActiveRole)) {{ $menuActiveRole }} @endif">
+                                    <a href="{{ route('roles.index') }}" class="menu-link">
+                                        <div class="text-truncate" data-i18n="Roles">Roles</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#" class="menu-link">
+                                        <div class="text-truncate" data-i18n="Permission">Permission</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- User -->
+                        <li class="menu-item @if (isset($menuActive)) {{ $menuActive }} @endif">
+                            <a href="{{ route('user.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-user"></i>
+                                <div class="text-truncate" data-i18n="Basic">User</div>
+                            </a>
+                        </li>
+                    @endif
 
                     <!-- Master Area -->
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Master</span></li>

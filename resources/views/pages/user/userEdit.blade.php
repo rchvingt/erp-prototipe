@@ -74,9 +74,10 @@
                                 <label class="form-label" for="user-role">User Role</label>
                                 <select id="ajax-select-role" class="mb-4 form-select w-50" name="roles"
                                     data-allow-clear="true"></select>
-                                @error('username')
+                                @error('roles')
                                     <div class="error">{{ $message }}</div>
                                 @enderror
+
                             </div>
 
 
@@ -102,19 +103,20 @@
                     dataType: "json",
                     delay: 250,
                     data: function(params) {
+                        // console.log(params);
                         return {
                             searchItem: params.term,
                             page: params.page
                         }
                     },
                     processResults: function(data, params) {
-                        // console.log(data); // Check the data format here
+                        // console.log(data.data); // Check the data format here
 
                         params.page = params.page || 1;
                         return {
                             results: data.data.map(function(item) {
                                 return {
-                                    id: item.name, // Kirimkan "name" sebagai id
+                                    id: item.name, // Kirimkan "id" sebagai id
                                     text: item.name
                                 };
                             }),
@@ -133,18 +135,26 @@
                 templateSelection: templateSelection
 
             })
+
+            // Menambahkan role yang sudah terpilih ke Select2 saat edit
+            var selectedRoles = @json($userRoles); // Ambil role yang dimiliki user
+            console.log(selectedRoles);
+            $.each(selectedRoles, function(key, value) {
+                // console.log(key, value);
+                var option = new Option(key, value, true, true); // Buat option dengan role terpilih
+                $('#ajax-select-role').append(option).trigger(
+                    'change'); // Tambahkan ke Select2 dan trigger perubahan
+            });
+
         })
 
         function templateResult(data) {
             // console.log('templateResult',data);
-            if (data.loading) {
-                return data.text;
-            }
-            return data.text;
+            return data.loading ? data.text : data.text;
         }
 
         function templateSelection(data) {
-            // console.log('templateSelection',data);
+            // console.log('templateSelection', data);
             return data.text || "Select an option";
         }
     </script>

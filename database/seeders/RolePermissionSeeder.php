@@ -27,7 +27,7 @@ class RolePermissionSeeder extends Seeder
                 ],
             ],
             [
-                'group_name' => 'Role & Permissions',
+                'group_name' => 'Role',
                 'permissions' => [
                     // Manage Role Permissions
                     'role.create',

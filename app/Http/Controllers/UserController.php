@@ -82,8 +82,11 @@ class UserController extends Controller
     {
         $edit = User::find($id);
         $menuActive = 'active';
+        $roles = Role::all(); // Ambil semua role
+        $userRoles = $edit->roles->pluck('id', 'name')->toArray(); // Ambil role yang dimiliki user (id dan name)
+        // dd($edit);
 
-        return view('pages.user.userEdit', compact('menuActive', 'edit'));
+        return view('pages.user.userEdit', compact('menuActive', 'edit', 'roles', 'userRoles'));
     }
 
     /**
@@ -109,7 +112,7 @@ class UserController extends Controller
 
             // update user
             $user->update();
-
+            // dd($request->input('roles'));
             if ($request->roles) {
                 $user->syncRoles($request->roles);
             }

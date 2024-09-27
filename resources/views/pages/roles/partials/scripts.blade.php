@@ -25,6 +25,7 @@
 
         // Fungsi untuk mengecek status grup
         function checkGroupStatus(group) {
+            // console.log('Checking', group);
             var allChecked = true;
             $('.permission-' + group).each(function() {
                 if (!$(this).is(':checked')) {
