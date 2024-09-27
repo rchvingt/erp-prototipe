@@ -116,7 +116,7 @@
                         return {
                             results: data.data.map(function(item) {
                                 return {
-                                    id: item.name, // Kirimkan "id" sebagai id
+                                    id: item.id, // Kirimkan "id" sebagai id
                                     text: item.name
                                 };
                             }),
@@ -125,8 +125,6 @@
                                 more: data.last_page != params.page
                             }
                         };
-
-
                     },
                     cache: true
                 },
@@ -138,7 +136,7 @@
 
             // Menambahkan role yang sudah terpilih ke Select2 saat edit
             var selectedRoles = @json($userRoles); // Ambil role yang dimiliki user
-            console.log(selectedRoles);
+            // console.log(selectedRoles);
             $.each(selectedRoles, function(key, value) {
                 // console.log(key, value);
                 var option = new Option(key, value, true, true); // Buat option dengan role terpilih

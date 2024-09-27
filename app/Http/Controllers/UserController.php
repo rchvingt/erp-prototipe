@@ -51,12 +51,18 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->username = $request->username;
             $user->password = Hash::make($request->password);
-            $user->save();
+
+            // Ambil ID role dari request
+            $roleIds = (array) $request->input('roles');
+
+            // Konversi ID role menjadi nama role
+            $roles = Role::whereIn('id', $roleIds)->pluck('name')->toArray();
 
             // Assign role ke user
-            if ($request->roles) {
-                $user->syncRoles($request->roles);
+            if ($roles) {
+                $user->syncRoles($roles);
             }
+            $user->save();
 
             return redirect()->back()->with([
                 'success' => 'User berhasil ditambahkan',
@@ -113,8 +119,16 @@ class UserController extends Controller
             // update user
             $user->update();
             // dd($request->input('roles'));
-            if ($request->roles) {
-                $user->syncRoles($request->roles);
+
+            // Ambil ID role dari request
+            $roleIds = (array) $request->input('roles');
+
+            // Konversi ID role menjadi nama role
+            $roles = Role::whereIn('id', $roleIds)->pluck('name')->toArray();
+
+            // dd($roles);
+            if ($roles) {
+                $user->syncRoles($roles);
             }
 
             return redirect()->route('user.index')->with(['success' => 'User berhasil diperbarui']);

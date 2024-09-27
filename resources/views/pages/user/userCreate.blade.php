@@ -35,8 +35,6 @@
                                     <input type="text" id="basic-default-email" class="form-control" name="email"
                                         placeholder="john.doe@example.com" aria-label="john.doe@example.com"
                                         aria-describedby="basic-default-email2">
-
-
                                 </div>
                                 <div class="form-text"> You can use letters, numbers &amp; periods </div>
                                 @error('email')
