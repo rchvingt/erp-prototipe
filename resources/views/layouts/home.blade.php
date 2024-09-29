@@ -121,74 +121,92 @@
                         </a>
                     </li>
 
-                    @if (auth()->user()->can('role.view'))
-                        <!-- User Area -->
+                    @if (auth()->user()->can('role.view') || auth()->user()->can('user.view'))
+                        <!-- Pengaturan Area -->
                         <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan</span>
                         </li>
-                        {{-- Role and Permission --}}
-                        <li class="menu-item  @if (isset($menuActiveParent)) {{ $menuActiveParent }} @endif""
-                            style="">
-                            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                <i class="menu-icon tf-icons bx bx-check-shield"></i>
-                                <div class="text-truncate" data-i18n="Roles &amp; Permissions">Roles &amp; Permissions
-                                </div>
-                            </a>
-                            <ul class="menu-sub">
-                                <li class="menu-item @if (isset($menuActiveRole)) {{ $menuActiveRole }} @endif">
-                                    <a href="{{ route('roles.index') }}" class="menu-link">
-                                        <div class="text-truncate" data-i18n="Roles">Roles</div>
-                                    </a>
-                                </li>
-                                <li class="menu-item">
-                                    <a href="#" class="menu-link">
-                                        <div class="text-truncate" data-i18n="Permission">Permission</div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+
+                        @if (auth()->user()->can('role.view'))
+                            {{-- Role and Permission --}}
+                            <li class="menu-item  @if (isset($menuActiveParent)) {{ $menuActiveParent }} @endif""
+                                style="">
+                                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                    <i class="menu-icon tf-icons bx bx-check-shield"></i>
+                                    <div class="text-truncate" data-i18n="Roles &amp; Permissions">Roles &amp;
+                                        Permissions
+                                    </div>
+                                </a>
+                                <ul class="menu-sub">
+                                    <li
+                                        class="menu-item @if (isset($menuActiveRole)) {{ $menuActiveRole }} @endif">
+                                        <a href="{{ route('roles.index') }}" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Roles">Roles</div>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#" class="menu-link">
+                                            <div class="text-truncate" data-i18n="Permission">Permission</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+
                         <!-- User -->
-                        <li class="menu-item @if (isset($menuActive)) {{ $menuActive }} @endif">
-                            <a href="{{ route('user.index') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-user"></i>
-                                <div class="text-truncate" data-i18n="Basic">User</div>
+                        @if (auth()->user()->can('user.view'))
+                            <li class="menu-item @if (isset($menuActive)) {{ $menuActive }} @endif">
+                                <a href="{{ route('user.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-user"></i>
+                                    <div class="text-truncate" data-i18n="Basic">User</div>
+                                </a>
+                            </li>
+                        @endif
+
+                    @endif
+
+                    @if (auth()->user()->can('material.view') || auth()->user()->can('supplier.view'))
+                        <!-- Master Area -->
+                        <li class="menu-header small text-uppercase"><span class="menu-header-text">Master</span></li>
+                        <!-- Material -->
+                        @if (auth()->user()->can('material.view'))
+                            <li class="menu-item @if (isset($menuActiveMaterial)) {{ $menuActiveMaterial }} @endif">
+                                <a href="{{ route('ref-material.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-stop"></i>
+                                    <div class="text-truncate" data-i18n="Basic">Material</div>
+                                </a>
+                            </li>
+                        @endif
+
+                        @if (auth()->user()->can('supplier.view'))
+                            <!-- Supplier -->
+                            <li class="menu-item @if (isset($menuActiveSupplier)) {{ $menuActiveSupplier }} @endif">
+                                <a href="{{ route('ref-supplier.index') }}" class="menu-link">
+                                    <i class="menu-icon tf-icons bx bx-stop"></i>
+                                    <div class="text-truncate" data-i18n="Basic">Supplier</div>
+                                </a>
+                            </li>
+                        @endif
+                    @endif
+
+                    @if (auth()->user()->can('pembelian.view'))
+                        <!-- Module Area -->
+                        <li class="menu-header small text-uppercase"><span class="menu-header-text">Module</span></li>
+                        <!-- Pembelian -->
+                        <li
+                            class="menu-item @if (isset($menuActivePurchaseOrder)) {{ $menuActivePurchaseOrder }} @endif">
+                            <a href="{{ route('pembelian.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-purchase-tag"></i>
+                                <div class="text-truncate" data-i18n="Basic">Pembelian</div>
+                            </a>
+                        </li>
+                        <!-- Gudang -->
+                        <li class="menu-item @if (isset($menuGudangActive)) {{ $menuGudangActive }} @endif">
+                            <a href="{{ route('gudang.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-store"></i>
+                                <div class="text-truncate" data-i18n="Basic">Gudang</div>
                             </a>
                         </li>
                     @endif
-
-                    <!-- Master Area -->
-                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Master</span></li>
-                    <!-- Material -->
-                    <li class="menu-item @if (isset($menuActiveMaterial)) {{ $menuActiveMaterial }} @endif">
-                        <a href="{{ route('ref-material.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-stop"></i>
-                            <div class="text-truncate" data-i18n="Basic">Material</div>
-                        </a>
-                    </li>
-                    <!-- Supplier -->
-                    <li class="menu-item @if (isset($menuActiveSupplier)) {{ $menuActiveSupplier }} @endif">
-                        <a href="{{ route('ref-supplier.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-stop"></i>
-                            <div class="text-truncate" data-i18n="Basic">Supplier</div>
-                        </a>
-                    </li>
-
-                    <!-- Module Area -->
-                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Module</span></li>
-                    <!-- Pembelian -->
-                    <li class="menu-item @if (isset($menuActivePurchaseOrder)) {{ $menuActivePurchaseOrder }} @endif">
-                        <a href="{{ route('pembelian.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-purchase-tag"></i>
-                            <div class="text-truncate" data-i18n="Basic">Pembelian</div>
-                        </a>
-                    </li>
-                    <!-- Gudang -->
-                    <li class="menu-item @if (isset($menuGudangActive)) {{ $menuGudangActive }} @endif">
-                        <a href="{{ route('gudang.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-store"></i>
-                            <div class="text-truncate" data-i18n="Basic">Gudang</div>
-                        </a>
-                    </li>
-
                 </ul>
             </aside>
             <!-- / Menu -->

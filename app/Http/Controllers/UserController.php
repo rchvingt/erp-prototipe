@@ -14,13 +14,18 @@ class UserController extends Controller
      */
     public function index()
     {
-        // Ambil semua user beserta role mereka
-        // $users = User::with('roles')->get();
-        $users = User::all();
-        // dd($users);
-        $menuActive = 'active';
+        if (auth()->user()->can('user.view')) {
+            // logic for authorized user
 
-        return view('pages.user.userIndex', compact('menuActive', 'users'));
+            // Ambil semua user beserta role mereka
+            $users = User::all();
+            // dd($users);
+            $menuActive = 'active';
+
+            return view('pages.user.userIndex', compact('menuActive', 'users'));
+        } else {
+            return redirect()->route('dashboard');
+        }
     }
 
     /**
@@ -28,9 +33,16 @@ class UserController extends Controller
      */
     public function create()
     {
-        $menuActive = 'active';
+        if (auth()->user()->can('user.create')) {
+            // logic for authorized user
 
-        return view('pages.user.userCreate', compact('menuActive'));
+            // dd($users);
+            $menuActive = 'active';
+
+            return view('pages.user.userCreate', compact('menuActive'));
+        } else {
+            return redirect()->route('dashboard');
+        }
     }
 
     /**
@@ -86,13 +98,17 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        $edit = User::find($id);
-        $menuActive = 'active';
-        $roles = Role::all(); // Ambil semua role
-        $userRoles = $edit->roles->pluck('id', 'name')->toArray(); // Ambil role yang dimiliki user (id dan name)
-        // dd($edit);
+        if (auth()->user()->can('user.edit')) {
+            $edit = User::find($id);
+            $menuActive = 'active';
+            $roles = Role::all(); // Ambil semua role
+            $userRoles = $edit->roles->pluck('id', 'name')->toArray(); // Ambil role yang dimiliki user (id dan name)
+            // dd($edit);
 
-        return view('pages.user.userEdit', compact('menuActive', 'edit', 'roles', 'userRoles'));
+            return view('pages.user.userEdit', compact('menuActive', 'edit', 'roles', 'userRoles'));
+        } else {
+            return redirect()->route('dashboard');
+        }
     }
 
     /**
@@ -100,40 +116,44 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        try {
-            $request->validate([
-                'name' => 'required',
-                'email' => 'required',
-                'username' => 'required',
-                // 'password' => 'required|min:6|confirmed',
-            ]);
+        if (auth()->user()->can('user.edit')) {
+            try {
+                $request->validate([
+                    'name' => 'required',
+                    'email' => 'required',
+                    'username' => 'required',
+                    // 'password' => 'required|min:6|confirmed',
+                ]);
 
-            $user = User::find($id);
-            $user->name = $request->name;
-            $user->email = $request->email;
+                $user = User::find($id);
+                $user->name = $request->name;
+                $user->email = $request->email;
 
-            if (!empty($request->password)) {
-                $user->password = Hash::make($request->password);
+                if (!empty($request->password)) {
+                    $user->password = Hash::make($request->password);
+                }
+
+                // update user
+                $user->update();
+                // dd($request->input('roles'));
+
+                // Ambil ID role dari request
+                $roleIds = (array) $request->input('roles');
+
+                // Konversi ID role menjadi nama role
+                $roles = Role::whereIn('id', $roleIds)->pluck('name')->toArray();
+
+                // dd($roles);
+                if ($roles) {
+                    $user->syncRoles($roles);
+                }
+
+                return redirect()->route('user.index')->with(['success' => 'User berhasil diperbarui']);
+            } catch (\Exception $e) {
+                return redirect()->route('user.index')->with(['failed' => $e->getMessage()]);
             }
-
-            // update user
-            $user->update();
-            // dd($request->input('roles'));
-
-            // Ambil ID role dari request
-            $roleIds = (array) $request->input('roles');
-
-            // Konversi ID role menjadi nama role
-            $roles = Role::whereIn('id', $roleIds)->pluck('name')->toArray();
-
-            // dd($roles);
-            if ($roles) {
-                $user->syncRoles($roles);
-            }
-
-            return redirect()->route('user.index')->with(['success' => 'User berhasil diperbarui']);
-        } catch (\Exception $e) {
-            return redirect()->route('user.index')->with(['failed' => $e->getMessage()]);
+        } else {
+            return redirect()->route('dashboard');
         }
     }
 
@@ -142,19 +162,23 @@ class UserController extends Controller
      */
     public function destroy(int $id)
     {
-        try {
-            $user = User::find($id);
+        if (auth()->user()->can('user.delete')) {
+            try {
+                $user = User::find($id);
 
-            // delete user from db
-            if ($user) {
-                $user->delete();
+                // delete user from db
+                if ($user) {
+                    $user->delete();
 
-                return redirect()->back()->with(['success' => 'User berhasil dihapus']);
-            } else {
-                return redirect()->back()->with(['failed' => 'User not found']);
+                    return redirect()->back()->with(['success' => 'User berhasil dihapus']);
+                } else {
+                    return redirect()->back()->with(['failed' => 'User not found']);
+                }
+            } catch (\Exception $e) {
+                return redirect()->route('user.index')->with(['failed' => $e->getMessage()]);
             }
-        } catch (\Exception $e) {
-            return redirect()->route('user.index')->with(['failed' => $e->getMessage()]);
+        } else {
+            return redirect()->route('dashboard');
         }
     }
 
